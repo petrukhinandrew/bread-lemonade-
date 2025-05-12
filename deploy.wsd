@@ -1,0 +1,20 @@
+@startuml
+
+actor User
+
+package "Kubernetes Cluster" {
+  [Ingress Controller] as ingress
+  [Frontend Service] as frontend
+  [Backend Service] as backend
+  [Database] as db1
+}
+
+User --> ingress : HTTPS
+ingress --> frontend
+ingress --> backend
+
+frontend --> backend : WebSockets
+
+backend --> db1
+
+@enduml

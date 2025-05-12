@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    tier: control
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: control
+  template:
+    metadata:
+      labels:
+        tier: control
+    spec:
+      containers:
+        - env:
+            - name: WDS_SOCKET_PORT
+              value: "0"
+          image: frontend:latest
+          ports: 
+            - containerPort: 80
+          name: frontend
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always

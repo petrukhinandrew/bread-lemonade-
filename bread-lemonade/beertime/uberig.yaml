@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: balancer
+spec:
+  type: LoadBalancer
+  selector:
+      kubernetes.io/hostname: "kek-control-plane"
+  ports:
+  - port: 80
+    targetPort: 30123

@@ -1,0 +1,23 @@
+services:
+  frontend:
+    container_name: frontend
+    build: ./ui
+    depends_on:
+      - backend
+    environment:
+      - WDS_SOCKET_PORT=0
+  backend:
+    container_name: backend
+    build: ./backend
+  nginx:
+    container_name: nginx
+    build: .
+    image: nginx
+    ports:
+      - "443:443"
+    volumes:
+      - ./certs:/etc/letsencrypt
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend
+      - frontend
